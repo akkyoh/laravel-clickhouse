@@ -10,8 +10,17 @@ Eloquent model for ClickHouse
 - clickhouse server
 
 ## Installation
-```sh
-$ composer require esazykin/laravel-clickhouse
+Update composer.json and run composer update
+```json
+"require": {
+    "esazykin/laravel-clickhouse": "*"
+},
+"repositories": [
+    {
+        "url": "https://github.com/akkyoh/laravel-clickhouse",
+        "type": "git"
+    }
+]
 ```
 
 Then add the code above into your config/app.php file providers section
@@ -23,44 +32,16 @@ And add new connection into your config/database.php file. Something like this:
 'connections' => [
     'clickhouse' => [
         'driver' => 'clickhouse',
-        'host' => '',
-        'port' => '',
-        'database' => '',
-        'username' => '',
-        'password' => '',
-        'options' => [
-            'timeout' => 10,
-            'protocol' => 'https'
-        ]
-    ]
-]
-```
-Or like this, if clickhouse runs in cluster
-```php
-'connections' => [
-    'clickhouse' => [
-        'driver' => 'clickhouse',
-        'cluster' => [
-            'server-1' => [
-                'host' => '',
-                'port' => '',
-                'database' => '',
-                'username' => '',
+        'servers' => [
+            [
+                'host' => '127.0.0.1',
+                'port' => '8123',
+                'database' => 'default',
+                'username' => 'default',
                 'password' => '',
                 'options' => [
                     'timeout' => 10,
-                    'protocol' => 'https'
-                ]
-            ],
-            'server-2' => [
-                'host' => '',
-                'port' => '',
-                'database' => '',
-                'username' => '',
-                'password' => '',
-                'options' => [
-                    'timeout' => 10,
-                    'protocol' => 'https'
+                    'protocol' => 'http'
                 ]
             ]
         ]
